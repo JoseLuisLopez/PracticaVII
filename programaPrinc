@@ -1,0 +1,71 @@
+using MySql.Data.MySqlClient;
+using System;
+using System.Data;
+
+
+
+
+namespace PracticaVIIMySQLConsola
+{
+    class Interfaz
+    {
+
+
+        protected dbApi dbApi = new dbApi();
+
+
+        public void menu()
+        {
+
+
+            string opcionSelecc;
+
+
+            do
+            {
+                Console.WriteLine("\tMenu de Acciones para sus Registros");
+                Console.Write("\n    1 Mostrar   2 Agregar  3 Editar  4 Eliminar   5 Salir \n\tNumero de la acción a Realizar: ");
+
+
+                opcionSelecc = Console.ReadLine();
+                if (opcionSelecc != "5") 
+                { 
+                    Console.WriteLine("\n\tProcesamiento de Acción Solicitada ");
+                    opcionesDelMenu(opcionSelecc);
+
+
+                    Console.WriteLine("\n\tPresione cualquier tecla para regresar al menu de acciones");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+            }
+            while (opcionSelecc != "5");
+            this.mrBones();
+        }
+        private void mostrar()
+        {
+            this.dbApi.mostrarDatosDb();
+        }
+
+
+        private void agregar()
+        {
+            string consulta = "INSERT INTO persona VALUES('',";
+
+
+            Console.Write("\t\tNombre: ");
+            consulta += "'" + Console.ReadLine() + "', ";
+            Console.Write("\t\tCodigo: ");
+            consulta += "'" + Console.ReadLine() + "', ";
+            Console.Write("\t\tTelefono: ");
+            consulta += "'" + Console.ReadLine() + "', ";
+            Console.Write("\t\temail: ");
+            consulta += "'" + Console.ReadLine() + "' )";
+
+
+            this.dbApi.ejecutarConsulta(consulta);
+
+
+        }
+
+
